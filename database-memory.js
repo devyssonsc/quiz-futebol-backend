@@ -2,9 +2,10 @@ import { randomUUID } from "crypto"
 
 export class DatabaseMemory {
     #questions = new Map()
+    #sequentialId = 0;
 
     create(question) {
-        const questionId = randomUUID()
+        const questionId = this.generateSequentialId().toString();
 
         this.#questions.set(questionId, question)
     }
@@ -27,5 +28,9 @@ export class DatabaseMemory {
 
     delete(id) {
         this.#questions.delete(id);
+    }
+
+    generateSequentialId() {
+        return this.#sequentialId++;
     }
 }
