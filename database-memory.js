@@ -1,15 +1,31 @@
-import { randomUUID } from "node:crypto"
+import { randomUUID } from "crypto"
 
 export class DatabaseMemory {
     #questions = new Map()
 
     create(question) {
-        const questionId = randomUUID()    // Universally Unique ID
+        const questionId = randomUUID()
 
         this.#questions.set(questionId, question)
     }
 
-    list(question, questionId) {
-        return this.#questions.values()
+    list() {
+        return Array.from(this.#questions.entries()).map((questionArray) => {
+            const id = questionArray[0];
+            const data = questionArray[1];
+
+            return{
+                id,
+                ...data,
+            }
+        })
+    }
+
+    update(id, question) {
+        this.#questions.set(id, question)
+    }
+
+    delete(id) {
+        this.#questions.delete(id);
     }
 }
