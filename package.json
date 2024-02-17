@@ -1,0 +1,19 @@
+{
+  "type": "module",
+  "dependencies": {
+    "fastify": "^4.26.1",
+    "node": "^21.6.2"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch --no-warnings server.js"
+  },
+  "name": "quiz-futebol-backend",
+  "description": "api para usar no projeto do quiz",
+  "version": "1.0.0",
+  "main": "server.js",
+  "devDependencies": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

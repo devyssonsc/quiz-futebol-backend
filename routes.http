@@ -1,0 +1,14 @@
+GET http://localhost:3333/questions
+
+###
+
+POST http://localhost:3333/questions
+Content-Type: application/json
+
+{
+    "question": "Quanto tempo dura uma partida de futebol?",
+    "possibleAnswers": ["75 Minutos","90 Minutos","100 Minutos", "60 Minutos"],
+    "correctAnswer": "90 Minutos",
+    "levelDifficulty": "Fácil (4pts)",
+    "points": 4
+}
