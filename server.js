@@ -1,19 +1,19 @@
 import { fastify } from 'fastify';
-import { DatabaseMemory } from './database-memory.js';
+import { DataBasePostgres } from './database-postgres.js';
 
 const server = fastify();
-const database = new DatabaseMemory();
+const database = new DataBasePostgres();
 
-server.get("/questions", () => {
-    const questions = database.list();
+server.get("/questions", async () => {
+    const questions = await database.list();
 
     return questions
 })
 
-server.post("/questions", (request, reply) => {
+server.post("/questions", async (request, reply) => {
     const { label, possibleAnswers, correctAnswer, levelDifficulty, points } = request.body
 
-    database.create({
+    await database.create({
         label,
         possibleAnswers,
         correctAnswer,
@@ -24,11 +24,11 @@ server.post("/questions", (request, reply) => {
     return reply.status(201).send()
 })
 
-server.put("/questions/:id", (request, reply) => {
+server.put("/questions/:id", async (request, reply) => {
     const questionId = request.params.id
     const { label, possibleAnswers, correctAnswer, levelDifficulty, points } = request.body
 
-    database.update(questionId, {
+    await database.update(questionId, {
         label,
         possibleAnswers,
         correctAnswer,
@@ -39,10 +39,10 @@ server.put("/questions/:id", (request, reply) => {
     return reply.status(204).send()
 })
 
-server.delete("/questions/:id", (request, reply) => {
+server.delete("/questions/:id", async (request, reply) => {
     const questionId = request.params.id;
 
-    database.delete(questionId);
+    await database.delete(questionId);
 
     return reply.status(204).send()
 })
